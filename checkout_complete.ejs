@@ -1,0 +1,20 @@
+<%- include ('partials/header') %>
+    <div class="container">
+        <div class="card text-center">
+            <div class="card-header" style="font-size:40px;">
+                <i class="fa fa-gift" style="color:pink" ></i> Payment Successful! <i class="fa fa-gift" style="color:pink"></i>
+            </div>
+            <div class="card-body" style="text-align: justify;">
+                <h5>Payer Name: <%= user.username%></h5>
+                <h5>Card Type: <%= card%></h5>
+                <h5>Amount Paid: <%= total_price%></h5>
+                <p class="card-text">Your payment was made from <%= card%> card, to check your transactions please visit your orders History page</p>
+            </div>
+            <h5 class="card-title"><%= user.username%>! Your Books are now ready</h5>
+            <a href="/" class="btn btn-primary">Back to home</a>
+            <div class="card-footer">
+                🎉🎉🎉 Happy Reading!!! 🎉🎉🎉
+            </div>
+        </div>
+    </div>
+<%- include ('partials/footer') %>
