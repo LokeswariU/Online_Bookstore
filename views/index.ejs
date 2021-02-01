@@ -1,0 +1,58 @@
+<%- include ('partials/header') %>
+    <div class="container">
+	<header class="jumbotron bgimg" style="background-repeat: no-repeat;background-size: cover;">
+         <div class="container welcome-text">
+			 <h2><b>Welcome To Online Book Store!</b></h2>
+             <p>UTD Online Bookstore in Dallas have always been the backbone of the literary movement in the city, helping #LiteraryDallas to flourish in beautiful ways. This amazing bookstore offers lovers of the written world a place to connect and read, all while supporting the entrepreneurial spirit that makes Dallas unique. One of the Dallas area's hidden gems, the UTD Online Booksmith is a unique delight for book-lovers and collectors alike. The shop has featured an inventory consisting exclusively of signed book copies.</p>
+             <p> 
+				 <% if(user && user.type === "admin"){ %>
+				 <a class="btn btn-primary btn-large" href="/items/new">Add New Book</a>
+				 <% } %>
+             </p>
+         </div>
+     </header>
+            <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+            <% items.forEach(function(item) { %>
+                <div class="col-md-4 col-sm-6 ">
+                    <div class="thumbnail">
+                            <img src="../images/<%= item.image %>" width="150" height="150">
+                            <div class="card-body">
+                                <a class="caption-title "><p class="card-text"><%= item.title %></p></a>
+                            </div>
+							 <p>
+                       			<a href="/items/<%= item._id %>" class="btn btn-primary">More Info</a>
+                   			</p>
+                    </div>
+                </div>
+            <%}); %>
+        </div>
+        <% if (pages > 0) { %>
+            <ul class="pagination text-center">
+                <% if (current == 1) { %>
+                    <li class="disabled page-item"><a class="page-link" >First</a></li>
+                <% } else { %>
+                    <li class="page-item"><a class="page-link" href="/?page=1">First</a></li>
+                <% } %>
+                <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                <% if (i !== 1) { %>
+                    <li class="disabled page-item"><a class="page-link">...</a></li>
+                <% } %>
+                <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                    <% if (i == current) { %>
+                        <li class="active page-item"><a class="page-link"><%= i %></a></li>
+                    <% } else { %>
+                        <li class="page-item"><a class="page-link" href="/?page=<%= i %>"><%= i %></a></li>
+                    <% } %>
+                    <% if (i == Number(current) + 4 && i < pages) { %>
+                        <li class="disabled page-item"><a class="page-link" >...</a></li>
+                    <% } %>
+                <% } %>
+                <% if (current == pages) { %>
+                    <li class="disabled page-item"><a class="page-link">Last</a></li>
+                <% } else { %>
+                    <li class="page-item"><a class="page-link" href="/?page=<%= pages %>">Last</a></li>
+                <% } %>
+            </ul>
+        <% } %>
+    </div>
+<%- include ('partials/footer') %>
